@@ -1,0 +1,14 @@
+pluginManagement { includeBuild("../node_modules/@react-native/gradle-plugin") }
+plugins { id("com.facebook.react.settings") }
+extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autolinkLibrariesFromCommand() }
+rootProject.name = 'SeQrRecall'
+include ':app'
+includeBuild('../node_modules/@react-native/gradle-plugin')
+
+// AGP defaults libraries to CMake 3.22.1. Pin native modules to 3.30.5
+// so Ninja object paths stay under Windows MAX_PATH.
+gradle.beforeProject { proj ->
+    proj.pluginManager.withPlugin("com.android.library") {
+        proj.android.externalNativeBuild.cmake.version = "3.30.5"
+    }
+}

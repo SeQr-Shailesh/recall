@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <RootNamespace>SeQrRecall.Api</RootNamespace>
+    <AssemblyName>SeQrRecall.Api</AssemblyName>
+    <Description>SeQr Recall HTTP API host. Thin controllers, middleware, and composition root.</Description>
+    <UserSecretsId>c641c3ea-727d-4ced-bdf7-aee1e04f4248</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Asp.Versioning.Mvc" />
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="Serilog.Sinks.File" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SeQrRecall.Application\SeQrRecall.Application.csproj" />
+    <ProjectReference Include="..\SeQrRecall.Infrastructure\SeQrRecall.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

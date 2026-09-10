@@ -1,0 +1,100 @@
+## .NET
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+[Ll]ogs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+project.lock.json
+artifacts/
+publish/
+TestResults/
+coverage/
+coverage.xml
+*.nupkg
+*.snupkg
+
+## Secrets and local configuration
+appsettings.*.local.json
+**/appsettings.Local.json
+*.pfx
+*.key
+*.pem
+secrets.json
+.env
+.env.local
+.env.*.local
+*.PublishSettings
+
+## Node / React Native
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+mobile/**/dist/
+mobile/**/.expo/
+mobile/**/.turbo/
+
+## Android
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+mobile/**/android/.gradle/
+mobile/**/android/app/build/
+mobile/**/android/build/
+mobile/**/.cxx/
+mobile/**/android/local.properties
+mobile/**/android/captures/
+mobile/**/*.keystore
+mobile/**/*.jks
+!mobile/**/debug.keystore
+
+## iOS (future)
+mobile/**/ios/Pods/
+mobile/**/ios/build/
+mobile/**/*.xcworkspace
+mobile/**/DerivedData/
+mobile/**/*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.moved-aside
+*.xcuserstate
+
+## Temporary media
+**/tmp/
+**/temp/
+**/*.tmp
+mobile/**/tmp-audio/
+mobile/**/tmp-photos/
+
+## IDE
+.vs/
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+*.swp
+*~
+
+## OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+## Serilog / local data
+*.log
+seqr-recall-data/
+SeQrRecallData/
+
+
+**/appsettings.Development.json

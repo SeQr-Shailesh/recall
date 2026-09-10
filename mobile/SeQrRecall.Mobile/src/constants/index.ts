@@ -1,0 +1,10 @@
+export const APP_NAME = 'SeQr Recall';
+export const APP_TAGLINE = 'Speak it. Recall it.';
+export const DEFAULT_PAGE_SIZE = 20;
+export const MAX_PAGE_SIZE = 100;
+export const DEV_OTP = '123456';
+export const NOTE_POLL_INTERVAL_MS = 1000;
+export const NOTE_POLL_MAX_ATTEMPTS = 45;
+export const MAX_RECORDING_SECONDS = 600;
+export const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
+export const PENDING_SYNC_INTERVAL_MS = 15000;

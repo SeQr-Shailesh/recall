@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>SeQrRecall.Domain</RootNamespace>
+    <AssemblyName>SeQrRecall.Domain</AssemblyName>
+    <Description>SeQr Recall domain entities and rules. No infrastructure dependencies.</Description>
+  </PropertyGroup>
+</Project>

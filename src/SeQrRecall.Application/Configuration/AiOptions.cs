@@ -15,9 +15,10 @@ public sealed class AiProviderEndpointOptions
 }
 
 /// <summary>
-/// AI:Provider selects which vendor summarizes transcripts: Mock, OpenAI, or Gemini.
+/// AI:Provider selects which vendor summarizes transcripts: Mock, OpenAI, Gemini, or Qwen.
 /// Each vendor has its own nested section so keys and models can stay configured together.
 /// Flat AI:ApiKey / Model / BaseUrl remain as a fallback (user secrets).
+/// Only one provider is registered at a time — change Provider to switch.
 /// </summary>
 public sealed class AiOptions
 {
@@ -37,9 +38,11 @@ public sealed class AiOptions
 
     public AiProviderEndpointOptions Gemini { get; set; } = new();
 
+    public AiProviderEndpointOptions Qwen { get; set; } = new();
+
     public AiProviderEndpointOptions ResolveActiveEndpoint()
     {
-        AiProviderEndpointOptions named = IsGemini() ? Gemini : OpenAI;
+        AiProviderEndpointOptions named = NamedEndpoint();
         return new AiProviderEndpointOptions
         {
             ApiKey = FirstNonEmpty(named.ApiKey, ApiKey),
@@ -52,6 +55,26 @@ public sealed class AiOptions
     public bool IsGemini()
     {
         return string.Equals(Provider, "Gemini", StringComparison.OrdinalIgnoreCase);
+    }
+
+    public bool IsQwen()
+    {
+        return string.Equals(Provider, "Qwen", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private AiProviderEndpointOptions NamedEndpoint()
+    {
+        if (IsGemini())
+        {
+            return Gemini;
+        }
+
+        if (IsQwen())
+        {
+            return Qwen;
+        }
+
+        return OpenAI;
     }
 
     private static string FirstNonEmpty(string? preferred, string? fallback)

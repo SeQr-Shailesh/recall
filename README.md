@@ -129,7 +129,7 @@ See [docs/Configuration.md](docs/Configuration.md).
 
 ## AI configuration
 
-`AI:Provider = Mock` uses `MockAiSummaryService` (Development default). `AI:Provider = OpenAI` uses `OpenAiSummaryService` (Production JSON). Set `AI:ApiKey` outside source control. See [docs/AI.md](docs/AI.md).
+`AI:Provider = Mock` uses `MockAiSummaryService` (base JSON default). `AI:Provider = Gemini` uses `GeminiSummaryService`. `AI:Provider = Qwen` uses `QwenSummaryService` against a self-hosted OpenAI-compatible Qwen3 endpoint. `AI:Provider = OpenAI` uses `OpenAiSummaryService` (Production JSON default). Set vendor API keys outside source control. See [docs/AI.md](docs/AI.md).
 
 ## Running tests
 

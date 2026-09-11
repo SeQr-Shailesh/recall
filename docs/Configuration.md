@@ -60,11 +60,12 @@ Bound to `SpeechOptions`. `Mock` registers `MockSpeechToTextService`. `Sarvam` r
 
 | Key | Default | Notes |
 | --- | --- | --- |
-| Provider | Mock | Switch: `Mock`, `OpenAI`, or `Gemini` |
+| Provider | Mock | Switch: `Mock`, `OpenAI`, `Gemini`, or `Qwen` |
 | OpenAI:ApiKey / Model / BaseUrl | empty / `gpt-4o-mini` / OpenAI host | used when Provider is `OpenAI` |
 | Gemini:ApiKey / Model / BaseUrl | empty / `gemini-3.5-flash` / Gemini host | used when Provider is `Gemini` |
+| Qwen:ApiKey / Model / BaseUrl | empty / `qwen3-4b` / `http://127.0.0.1:8000/v1` | used when Provider is `Qwen`; API key optional for a local server |
 
-Bound to `AiOptions`. `Mock` registers `MockAiSummaryService`. `OpenAI` registers `OpenAiSummaryService`. `Gemini` registers `GeminiSummaryService`. Startup fails if the selected provider has no API key (`AI:{Provider}:ApiKey`, or flat `AI:ApiKey` as a fallback), or if the provider name is unimplemented. To add another vendor later: new nested section + `RegisterAiProvider` branch.
+Bound to `AiOptions`. `Mock` registers `MockAiSummaryService`. `OpenAI` registers `OpenAiSummaryService`. `Gemini` registers `GeminiSummaryService`. `Qwen` registers `QwenSummaryService`. Startup fails if OpenAI or Gemini is selected with no API key (`AI:{Provider}:ApiKey`, or flat `AI:ApiKey` as a fallback), or if the provider name is unimplemented. Qwen does not require an API key. To add another vendor later: new nested section + `RegisterAiProvider` branch.
 
 ### Storage
 

@@ -164,8 +164,21 @@ public static class DependencyInjection
             return;
         }
 
+        if (string.Equals(provider, "Qwen", StringComparison.OrdinalIgnoreCase))
+        {
+            services.AddHttpClient<IAiSummaryService, QwenSummaryService>((providerServices, client) =>
+            {
+                AiProviderEndpointOptions endpoint =
+                    providerServices.GetRequiredService<IOptions<AiOptions>>().Value.ResolveActiveEndpoint();
+                client.BaseAddress = new Uri(NormalizeQwenBaseUrl(endpoint.BaseUrl), UriKind.Absolute);
+                int timeoutSeconds = endpoint.TimeoutSeconds > 0 ? endpoint.TimeoutSeconds : 120;
+                client.Timeout = TimeSpan.FromSeconds(timeoutSeconds);
+            });
+            return;
+        }
+
         throw new InvalidOperationException(
-            $"AI provider '{provider}' is not implemented. Use 'Mock', 'OpenAI', or 'Gemini'.");
+            $"AI provider '{provider}' is not implemented. Use 'Mock', 'OpenAI', 'Gemini', or 'Qwen'.");
     }
 
     private static string? ReadAiApiKey(IConfiguration configuration, string providerName)
@@ -195,6 +208,20 @@ public static class DependencyInjection
         if (value.Contains("api.openai.com", StringComparison.OrdinalIgnoreCase))
         {
             value = GeminiSummaryService.DefaultBaseUrl;
+        }
+
+        return value.EndsWith('/') ? value : value + "/";
+    }
+
+    private static string NormalizeQwenBaseUrl(string? baseUrl)
+    {
+        string value = string.IsNullOrWhiteSpace(baseUrl)
+            ? QwenSummaryService.DefaultBaseUrl
+            : baseUrl.Trim();
+        if (value.Contains("api.openai.com", StringComparison.OrdinalIgnoreCase)
+            || value.Contains("generativelanguage.googleapis.com", StringComparison.OrdinalIgnoreCase))
+        {
+            value = QwenSummaryService.DefaultBaseUrl;
         }
 
         return value.EndsWith('/') ? value : value + "/";

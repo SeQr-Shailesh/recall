@@ -59,12 +59,27 @@ public sealed class AiProviderRegistrationTests
     }
 
     [Fact]
+    public void Qwen_provider_registers_without_api_key()
+    {
+        using ServiceProvider provider = Build("Qwen", null);
+        Assert.IsType<QwenSummaryService>(provider.GetRequiredService<IAiSummaryService>());
+    }
+
+    [Fact]
+    public void Qwen_nested_base_url_registers()
+    {
+        using ServiceProvider provider = BuildNested("Qwen", "AI:Qwen:BaseUrl", "http://127.0.0.1:8000/v1");
+        Assert.IsType<QwenSummaryService>(provider.GetRequiredService<IAiSummaryService>());
+    }
+
+    [Fact]
     public void Unknown_provider_fails_at_startup()
     {
         InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() => Build("Anthropic", "x"));
         Assert.Contains("Anthropic", exception.Message, StringComparison.Ordinal);
         Assert.Contains("OpenAI", exception.Message, StringComparison.Ordinal);
         Assert.Contains("Gemini", exception.Message, StringComparison.Ordinal);
+        Assert.Contains("Qwen", exception.Message, StringComparison.Ordinal);
     }
 
     private static ServiceProvider Build(string provider, string? apiKey)

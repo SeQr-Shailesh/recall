@@ -77,7 +77,8 @@ Gradle / emulator runs remain blocked until JDK 17 and the Android SDK are insta
 | Test | What it proves |
 | --- | --- |
 | `OpenAiSummaryServiceTests` | Structured JSON maps to title/summary/action items; ISO due dates parse and relative words do not; 401/429/invalid JSON/refusal/timeout/missing title → `ExternalProviderException`; API key is not in the body or exception |
-| `AiProviderRegistrationTests` | `Mock`, `OpenAI`, and `Gemini` register the matching service; missing API keys and unknown providers fail at startup |
+| `AiProviderRegistrationTests` | `Mock`, `OpenAI`, `Gemini`, and `Qwen` register the matching service; missing OpenAI/Gemini API keys and unknown providers fail at startup; Qwen starts without an API key |
+| `QwenSummaryServiceTests` | Structured JSON maps to title/summary/action items; thinking tags are stripped; 401/429/invalid JSON/refusal/timeout/missing title → `ExternalProviderException`; bearer token is sent only when a key is configured |
 
 ## Phase 8
 

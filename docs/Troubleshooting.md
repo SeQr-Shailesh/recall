@@ -43,7 +43,7 @@ dotnet ef database update --project src/SeQrRecall.Infrastructure --startup-proj
 
 - Mobile never talks to Sarvam or OpenAI. Failures show as note status `Failed` or `Completed` with `processingError`.
 - `Speech:Provider = Sarvam` without `Speech:ApiKey` prevents the host from starting. Development can stay on `Mock`.
-- `AI:Provider = OpenAI` or `Gemini` without `AI:ApiKey` prevents the host from starting. Development can stay on `Mock`.
+- `AI:Provider = OpenAI` or `Gemini` without `AI:ApiKey` prevents the host from starting. `AI:Provider = Qwen` does not require a key. Development can stay on `Mock`.
 - If STT succeeds and AI fails, the note is `Completed` with a transcript and `processingError` explaining that the summary could not be generated.
 - Timeouts and invalid provider JSON are `ExternalProviderException` — clients see a generic message.
 

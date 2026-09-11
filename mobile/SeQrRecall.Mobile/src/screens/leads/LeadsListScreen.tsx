@@ -16,6 +16,7 @@ import * as leadsApi from '@api/leadsApi';
 import { SyncActionButton } from '@components/SyncActionButton';
 import type { LocalRecording } from '@services/localRecordings';
 import { choosePhoto } from '@services/photoPicker';
+import { useAuthStore } from '@store/authStore';
 import { useLeadsStore } from '@store/leadsStore';
 import {
   pendingLeads,
@@ -34,6 +35,7 @@ type Props = NativeStackScreenProps<LeadsStackParamList, 'LeadsList'>;
 
 export function LeadsListScreen({ navigation }: Props) {
   const theme = useTheme();
+  const signOut = useAuthStore((state) => state.signOut);
   const items = useLeadsStore((state) => state.items);
   const loading = useLeadsStore((state) => state.loading);
   const loadingMore = useLeadsStore((state) => state.loadingMore);
@@ -119,7 +121,14 @@ export function LeadsListScreen({ navigation }: Props) {
     <SafeAreaView style={[styles.safe, { backgroundColor: theme.colors.background }]}>
       <View style={[styles.header, { paddingHorizontal: theme.spacing.lg }]}>
         <Text style={[theme.typography.title, { color: theme.colors.text, flex: 1 }]}>Leads</Text>
-        <SyncActionButton />
+        <View style={styles.headerActions}>
+          <SyncActionButton />
+          <Pressable onPress={() => void signOut()} accessibilityRole="button">
+            <Text style={[theme.typography.body, { color: theme.colors.primary, fontWeight: '600' }]}>
+              Sign out
+            </Text>
+          </Pressable>
+        </View>
       </View>
       <TextInput
         value={searchInput}
@@ -296,6 +305,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 8,
     paddingBottom: 12,
+  },
+  headerActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 16,
   },
   search: {
     borderWidth: 1,
